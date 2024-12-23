@@ -13,8 +13,10 @@ num_envs : 4096
 # num_privileged_obs : 151 # v-teleop-superclean
 # num_observations : 65 # v-teleop-clean-nolastaction
 # num_privileged_obs : 141 # v-teleop-clean-nolastaction
+
 # num_observations : 90 # v-teleop_extend
 # num_privileged_obs : 166 # v-teleop_extend
+
 # num_observations : 87 # v-teleop_extend_nolinvel
 # num_privileged_obs : 163 # v-teleop_extend_nolinvel
 

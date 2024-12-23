@@ -1,0 +1,107 @@
+defaults:
+  - _self_
+  - asset: asset_teleop
+  - commands: commands_teleop
+  - control: control_teleop
+  - domain_rand: domain_rand_teleop
+  - env: env_teleop
+  - init_state: init_state_teleop
+  - motion: motion_teleop
+  - noise: noise_teleop
+  - normalization: normalization_teleop
+  - train: ppo_teleop
+  - rewards: rewards_teleop_omnih2o_teacher #训练和演示不一样
+  - sim: sim_teleop
+  - terrain: terrain_teleop
+  - viewer: viewer_base
+
+
+#####命令行####
+env:
+  num_observations: 913  # 观测数量
+  num_privileged_obs: 990  # 特权观测数量
+
+motion:
+  teleop_obs_version: v-teleop-extend-max-full  # 远程操作观测版本
+  motion_file: resources/motions/h1/amass_phc_filtered.pkl  # 动作文件路径
+  extend_head: true  # 是否扩展头部
+asset:
+  zero_out_far: false  # 是否清除远离的对象
+  termination_scales:
+    max_ref_motion_distance: 1.5  # 最大参考动作距离
+
+rewards:
+  penalty_curriculum: true  # 是否使用惩罚课程学习
+  penalty_scale: 0.5  # 惩罚项缩放比例
+
+run_name: "OmniH2O_TEACHER"
+
+resume: True 
+load_run: "24_11_08_16-52-56_OmniH2O_TEACHER"
+checkpoint: -1
+
+
+
+project_name: "H1"
+notes: "Default Notes"
+exp_name: &exp_name humanoid_smpl
+headless: True
+seed: 1
+no_log: False
+test: False 
+sim_device: "cuda:0"
+rl_device: "cuda:0"
+sim_device_id: 0
+metadata: false
+play: ${test}
+train: True
+im_dump: False
+task: "h1:teleop"
+# load_run: ""
+num_envs: 4096
+# checkpoint: -1
+
+joystick: False
+tmp_freeze_upper: False
+max_iterations: 1000000
+horovod: False
+# resume: False
+experiment_name: null
+# run_name: null
+compute_device_id: 0
+graphics_device_id: 0
+flex: False
+
+use_gpu: True
+use_gpu_pipeline: True
+subscenes: 0
+slices: 0
+num_threads: 0
+
+
+####### Testing Configs. ########
+server_mode: False
+no_virtual_display: False
+render_o3d: False
+debug: False
+follow: False
+add_proj: False
+real_traj: False
+
+hydra:
+  job:
+    name: ${exp_name}
+    env_set:
+      OMP_NUM_THREADS: 1
+  run:
+    dir: output/h1/${exp_name}
+
+use_wandb: True
+
+
+###### velocity estimation ########
+train_velocity_estimation: False
+use_velocity_estimation: False
+
+
+

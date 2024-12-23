@@ -50,10 +50,10 @@ asset_descriptors = [
     AssetDesc(h1_urdf, False),
 ]
 sk_tree = SkeletonTree.from_mjcf(h1_xml)
-motion_file = "/home/wenli-car/humanoid_teleoperation/legged_gym/resources/motions/h1/wave_and_walk_unfiltered.pkl"
+# motion_file = "/home/wenli-car/humanoid_teleoperation/legged_gym/resources/motions/h1/wave_and_walk_unfiltered.pkl"
 
 
-# motion_file = "data/h1/singles/0-KIT_3_walking_slow08_poses.pkl"
+motion_file = "data/h1/singles/0-KIT_3_walking_slow08_poses.pkl"
 # motion_file = "data/h1/singles/test.pkl"
 # motion_file = "data/h1/amass_test.pkl"
 

@@ -26,9 +26,12 @@ import wandb
 @hydra.main(
     version_base=None,
     config_path="../cfg",
-    config_name="config",
+    config_name="config_teleop",
 )
 def train(cfg_hydra: DictConfig) -> None:
+    # print(cfg_hydra)  # 打印所有配置，检查 env.num_observations 是否为 913
+    # sys.exit()#退出程序
+
     cfg_hydra = EasyDict(OmegaConf.to_container(cfg_hydra, resolve=True))
     cfg_hydra.physics_engine = gymapi.SIM_PHYSX
     env, env_cfg = task_registry.make_env_hydra(name=cfg_hydra.task, hydra_cfg=cfg_hydra, env_cfg=cfg_hydra)
@@ -49,7 +52,7 @@ def train(cfg_hydra: DictConfig) -> None:
         run_id = wandb.util.generate_id()
         run = wandb.init(name=cfg_hydra.task, config=cfg_hydra, id=run_id, dir=log_dir, sync_tensorboard=True)
         wandb.run.name = cfg_hydra.run_name
-    
+
     ppo_runner.learn(num_learning_iterations=train_cfg.runner.max_iterations, init_at_random_ep_len=False)
 
 if __name__ == '__main__':

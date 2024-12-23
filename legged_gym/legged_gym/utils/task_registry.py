@@ -164,7 +164,7 @@ class TaskRegistry():
             # load previously trained model
             resume_path = get_load_path(log_root, load_run=train_cfg.runner.load_run, checkpoint=train_cfg.runner.checkpoint)
             self.loaded_policy_path = resume_path
-            print(f"Loading model from: {resume_path}")
+            print(f"加载模型 from: {resume_path}")
             runner.load(resume_path)
         return runner, train_cfg
 
